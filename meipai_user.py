@@ -33,17 +33,18 @@ proxies={'http': 'http://120.26.110.59:8080'}
 #定时更换新ip代理
 def getNewIP():
     global proxies
-    try:
-        ipjson = requests.get('http://ip.16yun.cn:817/myip/pl/4c24a733-c984-4308-a543-e22d41d3cf82/?s=gsyhygjzvd&u=alex&format=json').text
-        ipDic = json.loads(ipjson)
-        ipArr=ipDic['proxy']
-        oneip=random.sample(ipArr,1)[0]
-        theip=str(oneip['ip'])+":"+str(oneip['port'])
-        proxies['http']=theip
-    except:
+#    try:
+#        #可加入请求自己的代理ip设置进行定时更换
+#        ipjson = requests.get('http://xxxxxx.json').text
+#        ipDic = json.loads(ipjson)
+#        ipArr=ipDic['proxy']
+#        oneip=random.sample(ipArr,1)[0]
+#        theip=str(oneip['ip'])+":"+str(oneip['port'])
+#        proxies['http']=theip
+#    except:
         oriIPArr=['http://120.26.110.59:8080','http://120.52.32.46:80','http://218.85.133.62:80']
         proxies['http']=random.sample(oriIPArr,1)[0]
-    finally:
+#    finally:
         timer = threading.Timer(5,getNewIP)
         timer.start()
 
